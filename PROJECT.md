@@ -22,6 +22,17 @@ This project is a Railway-hosted fork of [shinzo-labs/hubspot-mcp](https://githu
 - **Deployment:** Railway with Nixpacks builder
 - **Source:** Fork of @shinzolabs/hubspot-mcp v2.0.5
 
+## Required MCPs
+
+When working on this project in Claude Code, you'll need the HubSpot MCP server enabled to test and develop the tools.
+
+**Setup:**
+1. Copy `.claude/settings.json.example` to `.claude/settings.json`
+2. Update the URL if using a different deployment
+3. Claude Code will automatically load the HubSpot MCP when working in this project directory
+
+This configuration is project-specific and won't affect other projects. The HubSpot MCP (~92.7k tokens) is only loaded when needed.
+
 ## Quick Start
 
 ### Prerequisites

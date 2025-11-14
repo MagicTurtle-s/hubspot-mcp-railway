@@ -1,5 +1,19 @@
 # Claude Context: HubSpot MCP Railway
 
+## MCP Configuration
+
+This project uses a project-specific MCP configuration to load the HubSpot MCP server when working in this directory.
+
+**Setup:**
+- `.claude/settings.json` (local, gitignored) contains the actual MCP server configuration
+- `.claude/settings.json.example` (committed) serves as a template
+- The HubSpot MCP (~92.7k tokens) is only loaded when working in this project
+
+**When working on this project:**
+- The HubSpot MCP tools are automatically available for testing
+- You can use tools like `mcp__hubspot__crm_create_company` directly
+- This configuration doesn't affect other projects
+
 ## Architecture Overview
 
 ### Single-File MCP Server

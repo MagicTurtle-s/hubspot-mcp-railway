@@ -2,3 +2,7 @@ node_modules
 .DS_STORE
 notes.txt
 dist/
+
+# User-specific Claude settings
+.env
+.claude/settings.json
