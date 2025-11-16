@@ -1,7 +1,7 @@
 {
-  "name": "@shinzolabs/hubspot-mcp",
-  "version": "2.0.5",
-  "description": "Hubspot MCP - An extensive MCP server for the HubSpot API",
+  "name": "@magicturtle/mcp-hubspot",
+  "version": "1.0.0",
+  "description": "HubSpot MCP server with 116 CRM tools - companies, contacts, deals, leads, and more",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
@@ -12,7 +12,12 @@
     "start": "node ./dist/index.js",
     "test": "jest",
     "railway:build": "npm run build",
-    "railway:start": "npm start"
+    "railway:start": "npm start",
+    "prepublishOnly": "npm run build"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.15.1",
