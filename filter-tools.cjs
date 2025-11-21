@@ -1,56 +1,129 @@
 #!/usr/bin/env node
 
 /**
- * Filter HubSpot MCP tools to keep only the 34 selected tools
+ * Filter HubSpot MCP tools to keep only batch operations + search/get/list tools
  * This script modifies src/index.ts to comment out unwanted tools
  */
 
 const fs = require('fs');
 const path = require('path');
 
-// The 34 tools we want to keep
+// Tools to keep: batch operations + search/get/list tools
 const TOOLS_TO_KEEP = new Set([
-  // Core CRM Objects (10 tools)
-  'crm_list_objects',
-  'crm_get_object',
-  'crm_create_object',
-  'crm_update_object',
-  'crm_archive_object',
-  'crm_search_objects',
+  // Batch Operations - Associations
+  'crm_batch_create_associations',
+
+  // Batch Operations - Companies
+  'crm_batch_create_companies',
+  'crm_batch_update_companies',
+
+  // Batch Operations - Contacts
+  'crm_batch_create_contacts',
+  'crm_batch_update_contacts',
+
+  // Batch Operations - Deals
+  'crm_batch_create_deals',
+  'crm_batch_update_deals',
+
+  // Batch Operations - Leads
+  'crm_batch_create_leads',
+  'crm_batch_update_leads',
+
+  // Batch Operations - Objects
   'crm_batch_create_objects',
   'crm_batch_read_objects',
   'crm_batch_update_objects',
-  'crm_batch_archive_objects',
 
-  // Companies (8 tools)
-  'crm_create_company',
-  'crm_update_company',
+  // Batch Operations - Emails
+  'emails_batch_archive',
+  'emails_batch_create',
+  'emails_batch_read',
+
+  // Batch Operations - Meetings
+  'meetings_batch_archive',
+  'meetings_batch_create',
+  'meetings_batch_update',
+
+  // Batch Operations - Notes
+  'notes_batch_archive',
+  'notes_batch_create',
+  'notes_batch_read',
+  'notes_batch_update',
+
+  // Batch Operations - Tasks
+  'tasks_batch_archive',
+  'tasks_batch_create',
+  'tasks_batch_read',
+  'tasks_batch_update',
+
+  // Search/Get/List - Companies
   'crm_get_company',
   'crm_search_companies',
-  'crm_batch_create_companies',
-  'crm_batch_update_companies',
   'crm_get_company_properties',
-  'crm_create_company_property',
 
-  // Contacts (8 tools)
-  'crm_create_contact',
-  'crm_update_contact',
+  // Search/Get/List - Objects
+  'crm_list_objects',
+  'crm_get_object',
+  'crm_search_objects',
+
+  // Search/Get/List - Associations
+  'crm_list_association_types',
+  'crm_get_associations',
+
+  // Search/Get/List - Contacts
   'crm_get_contact',
   'crm_search_contacts',
-  'crm_batch_create_contacts',
-  'crm_batch_update_contacts',
   'crm_get_contact_properties',
-  'crm_create_contact_property',
 
-  // Leads (8 tools)
-  'crm_create_lead',
-  'crm_update_lead',
+  // Search/Get/List - Leads
   'crm_get_lead',
   'crm_search_leads',
-  'crm_batch_create_leads',
-  'crm_batch_update_leads',
   'crm_get_lead_properties',
-  'crm_create_lead_property'
+
+  // Search/Get/List - Deals
+  'crm_get_deal',
+  'crm_search_deals',
+  'crm_get_deal_properties',
+
+  // Search/Get/List - Meetings
+  'meetings_list',
+  'meetings_get',
+  'meetings_search',
+
+  // Search/Get/List - Notes
+  'notes_get',
+  'notes_list',
+  'notes_search',
+
+  // Search/Get/List - Tasks
+  'tasks_get',
+  'tasks_list',
+  'tasks_search',
+
+  // Search/Get/List - Engagement
+  'engagement_details_get',
+  'engagement_details_list',
+  'engagement_details_get_associated',
+
+  // Search/Get/List - Calls
+  'calls_get',
+  'calls_list',
+  'calls_search',
+
+  // Search/Get/List - Emails
+  'emails_get',
+  'emails_list',
+  'emails_search',
+
+  // Search/Get/List - Communications
+  'communications_get_preferences',
+  'communications_get_subscription_definitions',
+  'communications_get_subscription_status',
+
+  // Search/Get/List - Products
+  'products_list',
+  'products_read',
+  'products_search'
 ]);
 
 const sourcePath = path.join(__dirname, 'src', 'index.ts');
@@ -125,5 +198,5 @@ console.log('\n=== SUMMARY ===');
 console.log(`Tools kept: ${keptCount}`);
 console.log(`Tools filtered: ${commentedCount}`);
 console.log(`Total tools: ${keptCount + commentedCount}`);
-console.log(`\nBackup saved to: ${backupPath}`);
+console.log(`Backup saved to: ${backupPath}`);
 console.log('Done!');
