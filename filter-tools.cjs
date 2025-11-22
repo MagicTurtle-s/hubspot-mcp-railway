@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
 /**
- * Filter HubSpot MCP tools to keep only batch operations + search/get/list tools
+ * Filter HubSpot MCP tools to keep core CRM operations only
+ * Keeps: Companies, Contacts, Leads, Deals, Objects, Associations, Meetings, Notes, Tasks
+ * Removes: Products, Emails, Communications, Calls, Engagement
  * This script modifies src/index.ts to comment out unwanted tools
  */
 
@@ -33,11 +35,6 @@ const TOOLS_TO_KEEP = new Set([
   'crm_batch_create_objects',
   'crm_batch_read_objects',
   'crm_batch_update_objects',
-
-  // Batch Operations - Emails
-  'emails_batch_archive',
-  'emails_batch_create',
-  'emails_batch_read',
 
   // Batch Operations - Meetings
   'meetings_batch_archive',
@@ -98,32 +95,7 @@ const TOOLS_TO_KEEP = new Set([
   // Search/Get/List - Tasks
   'tasks_get',
   'tasks_list',
-  'tasks_search',
-
-  // Search/Get/List - Engagement
-  'engagement_details_get',
-  'engagement_details_list',
-  'engagement_details_get_associated',
-
-  // Search/Get/List - Calls
-  'calls_get',
-  'calls_list',
-  'calls_search',
-
-  // Search/Get/List - Emails
-  'emails_get',
-  'emails_list',
-  'emails_search',
-
-  // Search/Get/List - Communications
-  'communications_get_preferences',
-  'communications_get_subscription_definitions',
-  'communications_get_subscription_status',
-
-  // Search/Get/List - Products
-  'products_list',
-  'products_read',
-  'products_search'
+  'tasks_search'
 ]);
 
 const sourcePath = path.join(__dirname, 'src', 'index.ts');

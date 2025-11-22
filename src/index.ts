@@ -1915,18 +1915,19 @@ function createServer({ config }: { config?: any } = {}) {
     status: z.string().optional()
   }).catchall(z.any())
 
-  server.tool("engagement_details_get",
-    "Get details of a specific engagement",
-    {
-      engagementId: z.string()
-    },
-    async (params) => {
-      return handleEndpoint(async () => {
-        const endpoint = `/engagements/v1/engagements/${params.engagementId}`
-        return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint)
-      })
-    }
-  )
+  // [FILTERED] engagement_details_get
+  //   server.tool("engagement_details_get",
+  //     "Get details of a specific engagement",
+  //     {
+  //       engagementId: z.string()
+  //     },
+  //     async (params) => {
+  //       return handleEndpoint(async () => {
+  //         const endpoint = `/engagements/v1/engagements/${params.engagementId}`
+  //         return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint)
+  //       })
+  //     }
+  //   )
 
   // [FILTERED] engagement_details_create
   //   server.tool("engagement_details_create",
@@ -1973,28 +1974,29 @@ function createServer({ config }: { config?: any } = {}) {
   //     }
   //   )
 
-  server.tool("engagement_details_list",
-    "List all engagements with optional filtering",
-    {
-      limit: z.number().min(1).max(100).optional(),
-      offset: z.number().optional(),
-      startTime: z.string().optional(),
-      endTime: z.string().optional(),
-      activityTypes: z.array(z.string()).optional()
-    },
-    async (params) => {
-      return handleEndpoint(async () => {
-        const endpoint = '/engagements/v1/engagements/paged'
-        return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {
-          limit: params.limit,
-          offset: params.offset,
-          startTime: params.startTime,
-          endTime: params.endTime,
-          activityTypes: params.activityTypes?.join(',')
-        })
-      })
-    }
-  )
+  // [FILTERED] engagement_details_list
+  //   server.tool("engagement_details_list",
+  //     "List all engagements with optional filtering",
+  //     {
+  //       limit: z.number().min(1).max(100).optional(),
+  //       offset: z.number().optional(),
+  //       startTime: z.string().optional(),
+  //       endTime: z.string().optional(),
+  //       activityTypes: z.array(z.string()).optional()
+  //     },
+  //     async (params) => {
+  //       return handleEndpoint(async () => {
+  //         const endpoint = '/engagements/v1/engagements/paged'
+  //         return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {
+  //           limit: params.limit,
+  //           offset: params.offset,
+  //           startTime: params.startTime,
+  //           endTime: params.endTime,
+  //           activityTypes: params.activityTypes?.join(',')
+  //         })
+  //       })
+  //     }
+  //   )
 
   // [FILTERED] engagement_details_archive
   //   server.tool("engagement_details_archive",
@@ -2010,30 +2012,31 @@ function createServer({ config }: { config?: any } = {}) {
   //     }
   //   )
 
-  server.tool("engagement_details_get_associated",
-    "Get all engagements associated with an object",
-    {
-      objectType: z.enum(['CONTACT', 'COMPANY', 'DEAL', 'TICKET']),
-      objectId: z.string(),
-      startTime: z.string().optional(),
-      endTime: z.string().optional(),
-      activityTypes: z.array(z.string()).optional(),
-      limit: z.number().min(1).max(100).optional(),
-      offset: z.number().optional()
-    },
-    async (params) => {
-      return handleEndpoint(async () => {
-        const endpoint = `/engagements/v1/engagements/associated/${params.objectType}/${params.objectId}/paged`
-        return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {
-          startTime: params.startTime,
-          endTime: params.endTime,
-          activityTypes: params.activityTypes?.join(','),
-          limit: params.limit,
-          offset: params.offset
-        })
-      })
-    }
-  )
+  // [FILTERED] engagement_details_get_associated
+  //   server.tool("engagement_details_get_associated",
+  //     "Get all engagements associated with an object",
+  //     {
+  //       objectType: z.enum(['CONTACT', 'COMPANY', 'DEAL', 'TICKET']),
+  //       objectId: z.string(),
+  //       startTime: z.string().optional(),
+  //       endTime: z.string().optional(),
+  //       activityTypes: z.array(z.string()).optional(),
+  //       limit: z.number().min(1).max(100).optional(),
+  //       offset: z.number().optional()
+  //     },
+  //     async (params) => {
+  //       return handleEndpoint(async () => {
+  //         const endpoint = `/engagements/v1/engagements/associated/${params.objectType}/${params.objectId}/paged`
+  //         return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {
+  //           startTime: params.startTime,
+  //           endTime: params.endTime,
+  //           activityTypes: params.activityTypes?.join(','),
+  //           limit: params.limit,
+  //           offset: params.offset
+  //         })
+  //       })
+  //     }
+  //   )
 
   // Calls: https://developers.hubspot.com/docs/reference/api/crm/engagements/calls
 
@@ -2073,23 +2076,24 @@ function createServer({ config }: { config?: any } = {}) {
   //     }
   //   )
 
-  server.tool("calls_get",
-    "Get details of a specific call",
-    {
-      callId: z.string(),
-      properties: z.array(z.string()).optional(),
-      associations: z.array(z.enum(['contacts', 'companies', 'deals', 'tickets'])).optional()
-    },
-    async (params) => {
-      return handleEndpoint(async () => {
-        const endpoint = `/crm/v3/objects/calls/${params.callId}`
-        return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {
-          properties: params.properties?.join(','),
-          associations: params.associations?.join(',')
-        })
-      })
-    }
-  )
+  // [FILTERED] calls_get
+  //   server.tool("calls_get",
+  //     "Get details of a specific call",
+  //     {
+  //       callId: z.string(),
+  //       properties: z.array(z.string()).optional(),
+  //       associations: z.array(z.enum(['contacts', 'companies', 'deals', 'tickets'])).optional()
+  //     },
+  //     async (params) => {
+  //       return handleEndpoint(async () => {
+  //         const endpoint = `/crm/v3/objects/calls/${params.callId}`
+  //         return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {
+  //           properties: params.properties?.join(','),
+  //           associations: params.associations?.join(',')
+  //         })
+  //       })
+  //     }
+  //   )
 
   // [FILTERED] calls_update
   //   server.tool("calls_update",
@@ -2122,60 +2126,62 @@ function createServer({ config }: { config?: any } = {}) {
   //     }
   //   )
 
-  server.tool("calls_list",
-    "List all calls with optional filtering",
-    {
-      limit: z.number().min(1).max(100).optional(),
-      after: z.string().optional(),
-      properties: z.array(z.string()).optional(),
-      associations: z.array(z.enum(['contacts', 'companies', 'deals', 'tickets'])).optional(),
-      archived: z.boolean().optional()
-    },
-    async (params) => {
-      return handleEndpoint(async () => {
-        const endpoint = '/crm/v3/objects/calls'
-        return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {
-          limit: params.limit,
-          after: params.after,
-          properties: params.properties?.join(','),
-          associations: params.associations?.join(','),
-          archived: params.archived
-        })
-      })
-    }
-  )
+  // [FILTERED] calls_list
+  //   server.tool("calls_list",
+  //     "List all calls with optional filtering",
+  //     {
+  //       limit: z.number().min(1).max(100).optional(),
+  //       after: z.string().optional(),
+  //       properties: z.array(z.string()).optional(),
+  //       associations: z.array(z.enum(['contacts', 'companies', 'deals', 'tickets'])).optional(),
+  //       archived: z.boolean().optional()
+  //     },
+  //     async (params) => {
+  //       return handleEndpoint(async () => {
+  //         const endpoint = '/crm/v3/objects/calls'
+  //         return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {
+  //           limit: params.limit,
+  //           after: params.after,
+  //           properties: params.properties?.join(','),
+  //           associations: params.associations?.join(','),
+  //           archived: params.archived
+  //         })
+  //       })
+  //     }
+  //   )
 
-  server.tool("calls_search",
-    "Search calls with specific filters",
-    {
-      filterGroups: z.array(z.object({
-        filters: z.array(z.object({
-          propertyName: z.string(),
-          operator: z.enum(['EQ', 'NEQ', 'LT', 'LTE', 'GT', 'GTE', 'BETWEEN', 'IN', 'NOT_IN', 'HAS_PROPERTY', 'NOT_HAS_PROPERTY', 'CONTAINS_TOKEN', 'NOT_CONTAINS_TOKEN']),
-          value: z.any()
-        }))
-      })),
-      properties: z.array(z.string()).optional(),
-      limit: z.number().min(1).max(100).optional(),
-      after: z.string().optional(),
-      sorts: z.array(z.object({
-        propertyName: z.string(),
-        direction: z.enum(['ASCENDING', 'DESCENDING'])
-      })).optional()
-    },
-    async (params) => {
-      return handleEndpoint(async () => {
-        const endpoint = '/crm/v3/objects/calls/search'
-        return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {}, 'POST', {
-          filterGroups: params.filterGroups,
-          properties: params.properties,
-          limit: params.limit,
-          after: params.after,
-          sorts: params.sorts
-        })
-      })
-    }
-  )
+  // [FILTERED] calls_search
+  //   server.tool("calls_search",
+  //     "Search calls with specific filters",
+  //     {
+  //       filterGroups: z.array(z.object({
+  //         filters: z.array(z.object({
+  //           propertyName: z.string(),
+  //           operator: z.enum(['EQ', 'NEQ', 'LT', 'LTE', 'GT', 'GTE', 'BETWEEN', 'IN', 'NOT_IN', 'HAS_PROPERTY', 'NOT_HAS_PROPERTY', 'CONTAINS_TOKEN', 'NOT_CONTAINS_TOKEN']),
+  //           value: z.any()
+  //         }))
+  //       })),
+  //       properties: z.array(z.string()).optional(),
+  //       limit: z.number().min(1).max(100).optional(),
+  //       after: z.string().optional(),
+  //       sorts: z.array(z.object({
+  //         propertyName: z.string(),
+  //         direction: z.enum(['ASCENDING', 'DESCENDING'])
+  //       })).optional()
+  //     },
+  //     async (params) => {
+  //       return handleEndpoint(async () => {
+  //         const endpoint = '/crm/v3/objects/calls/search'
+  //         return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {}, 'POST', {
+  //           filterGroups: params.filterGroups,
+  //           properties: params.properties,
+  //           limit: params.limit,
+  //           after: params.after,
+  //           sorts: params.sorts
+  //         })
+  //       })
+  //     }
+  //   )
 
   // [FILTERED] calls_batch_create
   //   server.tool("calls_batch_create",
@@ -2302,23 +2308,24 @@ function createServer({ config }: { config?: any } = {}) {
   //     }
   //   )
 
-  server.tool("emails_get",
-    "Get details of a specific email",
-    {
-      emailId: z.string(),
-      properties: z.array(z.string()).optional(),
-      associations: z.array(z.enum(['contacts', 'companies', 'deals', 'tickets'])).optional()
-    },
-    async (params) => {
-      return handleEndpoint(async () => {
-        const endpoint = `/crm/v3/objects/emails/${params.emailId}`
-        return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {
-          properties: params.properties?.join(','),
-          associations: params.associations?.join(',')
-        })
-      })
-    }
-  )
+  // [FILTERED] emails_get
+  //   server.tool("emails_get",
+  //     "Get details of a specific email",
+  //     {
+  //       emailId: z.string(),
+  //       properties: z.array(z.string()).optional(),
+  //       associations: z.array(z.enum(['contacts', 'companies', 'deals', 'tickets'])).optional()
+  //     },
+  //     async (params) => {
+  //       return handleEndpoint(async () => {
+  //         const endpoint = `/crm/v3/objects/emails/${params.emailId}`
+  //         return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {
+  //           properties: params.properties?.join(','),
+  //           associations: params.associations?.join(',')
+  //         })
+  //       })
+  //     }
+  //   )
 
   // [FILTERED] emails_update
   //   server.tool("emails_update",
@@ -2351,103 +2358,107 @@ function createServer({ config }: { config?: any } = {}) {
   //     }
   //   )
 
-  server.tool("emails_list",
-    "List all emails with optional filtering",
-    {
-      limit: z.number().min(1).max(100).optional(),
-      after: z.string().optional(),
-      properties: z.array(z.string()).optional(),
-      associations: z.array(z.enum(['contacts', 'companies', 'deals', 'tickets'])).optional(),
-      archived: z.boolean().optional()
-    },
-    async (params) => {
-      return handleEndpoint(async () => {
-        const endpoint = '/crm/v3/objects/emails'
-        return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {
-          limit: params.limit,
-          after: params.after,
-          properties: params.properties?.join(','),
-          associations: params.associations?.join(','),
-          archived: params.archived
-        })
-      })
-    }
-  )
+  // [FILTERED] emails_list
+  //   server.tool("emails_list",
+  //     "List all emails with optional filtering",
+  //     {
+  //       limit: z.number().min(1).max(100).optional(),
+  //       after: z.string().optional(),
+  //       properties: z.array(z.string()).optional(),
+  //       associations: z.array(z.enum(['contacts', 'companies', 'deals', 'tickets'])).optional(),
+  //       archived: z.boolean().optional()
+  //     },
+  //     async (params) => {
+  //       return handleEndpoint(async () => {
+  //         const endpoint = '/crm/v3/objects/emails'
+  //         return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {
+  //           limit: params.limit,
+  //           after: params.after,
+  //           properties: params.properties?.join(','),
+  //           associations: params.associations?.join(','),
+  //           archived: params.archived
+  //         })
+  //       })
+  //     }
+  //   )
 
-  server.tool("emails_search",
-    "Search emails with specific filters",
-    {
-      filterGroups: z.array(z.object({
-        filters: z.array(z.object({
-          propertyName: z.string(),
-          operator: z.enum(['EQ', 'NEQ', 'LT', 'LTE', 'GT', 'GTE', 'BETWEEN', 'IN', 'NOT_IN', 'HAS_PROPERTY', 'NOT_HAS_PROPERTY', 'CONTAINS_TOKEN', 'NOT_CONTAINS_TOKEN']),
-          value: z.any()
-        }))
-      })),
-      properties: z.array(z.string()).optional(),
-      limit: z.number().min(1).max(100).optional(),
-      after: z.string().optional(),
-      sorts: z.array(z.object({
-        propertyName: z.string(),
-        direction: z.enum(['ASCENDING', 'DESCENDING'])
-      })).optional()
-    },
-    async (params) => {
-      return handleEndpoint(async () => {
-        const endpoint = '/crm/v3/objects/emails/search'
-        return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {}, 'POST', {
-          filterGroups: params.filterGroups,
-          properties: params.properties,
-          limit: params.limit,
-          after: params.after,
-          sorts: params.sorts
-        })
-      })
-    }
-  )
+  // [FILTERED] emails_search
+  //   server.tool("emails_search",
+  //     "Search emails with specific filters",
+  //     {
+  //       filterGroups: z.array(z.object({
+  //         filters: z.array(z.object({
+  //           propertyName: z.string(),
+  //           operator: z.enum(['EQ', 'NEQ', 'LT', 'LTE', 'GT', 'GTE', 'BETWEEN', 'IN', 'NOT_IN', 'HAS_PROPERTY', 'NOT_HAS_PROPERTY', 'CONTAINS_TOKEN', 'NOT_CONTAINS_TOKEN']),
+  //           value: z.any()
+  //         }))
+  //       })),
+  //       properties: z.array(z.string()).optional(),
+  //       limit: z.number().min(1).max(100).optional(),
+  //       after: z.string().optional(),
+  //       sorts: z.array(z.object({
+  //         propertyName: z.string(),
+  //         direction: z.enum(['ASCENDING', 'DESCENDING'])
+  //       })).optional()
+  //     },
+  //     async (params) => {
+  //       return handleEndpoint(async () => {
+  //         const endpoint = '/crm/v3/objects/emails/search'
+  //         return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {}, 'POST', {
+  //           filterGroups: params.filterGroups,
+  //           properties: params.properties,
+  //           limit: params.limit,
+  //           after: params.after,
+  //           sorts: params.sorts
+  //         })
+  //       })
+  //     }
+  //   )
 
-  server.tool("emails_batch_create",
-    "Create multiple email records in a single request",
-    {
-      inputs: z.array(z.object({
-        properties: emailPropertiesSchema,
-        associations: z.array(z.object({
-          to: z.object({ id: z.string() }),
-          types: z.array(z.object({
-            associationCategory: z.string(),
-            associationTypeId: z.number()
-          }))
-        })).optional()
-      }))
-    },
-    async (params) => {
-      return handleEndpoint(async () => {
-        const endpoint = '/crm/v3/objects/emails/batch/create'
-        return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {}, 'POST', {
-          inputs: params.inputs
-        })
-      })
-    }
-  )
+  // [FILTERED] emails_batch_create
+  //   server.tool("emails_batch_create",
+  //     "Create multiple email records in a single request",
+  //     {
+  //       inputs: z.array(z.object({
+  //         properties: emailPropertiesSchema,
+  //         associations: z.array(z.object({
+  //           to: z.object({ id: z.string() }),
+  //           types: z.array(z.object({
+  //             associationCategory: z.string(),
+  //             associationTypeId: z.number()
+  //           }))
+  //         })).optional()
+  //       }))
+  //     },
+  //     async (params) => {
+  //       return handleEndpoint(async () => {
+  //         const endpoint = '/crm/v3/objects/emails/batch/create'
+  //         return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {}, 'POST', {
+  //           inputs: params.inputs
+  //         })
+  //       })
+  //     }
+  //   )
 
-  server.tool("emails_batch_read",
-    "Read multiple email records in a single request",
-    {
-      inputs: z.array(z.object({
-        id: z.string(),
-        properties: z.array(z.string()).optional(),
-        associations: z.array(z.enum(['contacts', 'companies', 'deals', 'tickets'])).optional()
-      }))
-    },
-    async (params) => {
-      return handleEndpoint(async () => {
-        const endpoint = '/crm/v3/objects/emails/batch/read'
-        return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {}, 'POST', {
-          inputs: params.inputs
-        })
-      })
-    }
-  )
+  // [FILTERED] emails_batch_read
+  //   server.tool("emails_batch_read",
+  //     "Read multiple email records in a single request",
+  //     {
+  //       inputs: z.array(z.object({
+  //         id: z.string(),
+  //         properties: z.array(z.string()).optional(),
+  //         associations: z.array(z.enum(['contacts', 'companies', 'deals', 'tickets'])).optional()
+  //       }))
+  //     },
+  //     async (params) => {
+  //       return handleEndpoint(async () => {
+  //         const endpoint = '/crm/v3/objects/emails/batch/read'
+  //         return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {}, 'POST', {
+  //           inputs: params.inputs
+  //         })
+  //       })
+  //     }
+  //   )
 
   // [FILTERED] emails_batch_update
   //   server.tool("emails_batch_update",
@@ -2468,20 +2479,21 @@ function createServer({ config }: { config?: any } = {}) {
   //     }
   //   )
 
-  server.tool("emails_batch_archive",
-    "Archive (delete) multiple email records in a single request",
-    {
-      emailIds: z.array(z.string()),
-    },
-    async (params) => {
-      return handleEndpoint(async () => {
-        const endpoint = '/crm/v3/objects/emails/batch/archive'
-        return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {}, 'POST', {
-          inputs: params.emailIds.map((id: string) => ({ id }))
-        })
-      })
-    }
-  )
+  // [FILTERED] emails_batch_archive
+  //   server.tool("emails_batch_archive",
+  //     "Archive (delete) multiple email records in a single request",
+  //     {
+  //       emailIds: z.array(z.string()),
+  //     },
+  //     async (params) => {
+  //       return handleEndpoint(async () => {
+  //         const endpoint = '/crm/v3/objects/emails/batch/archive'
+  //         return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {}, 'POST', {
+  //           inputs: params.emailIds.map((id: string) => ({ id }))
+  //         })
+  //       })
+  //     }
+  //   )
 
   // Communications: https://developers.hubspot.com/docs/reference/api/crm/engagements/communications
 
@@ -2492,20 +2504,21 @@ function createServer({ config }: { config?: any } = {}) {
     legalBasisExplanation: z.string().optional()
   }).catchall(z.any())
 
-  server.tool("communications_get_preferences",
-    "Get communication preferences for a contact",
-    {
-      contactId: z.string(),
-      subscriptionId: z.string().optional()
-    },
-    async (params) => {
-      return handleEndpoint(async () => {
-        const subscriptionEndpointPath = params.subscriptionId ? `/subscription/${params.subscriptionId}` : ''
-        const endpoint = `/communication-preferences/v3/status/email/${params.contactId}${subscriptionEndpointPath}`
-        return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint)
-      })
-    }
-  )
+  // [FILTERED] communications_get_preferences
+  //   server.tool("communications_get_preferences",
+  //     "Get communication preferences for a contact",
+  //     {
+  //       contactId: z.string(),
+  //       subscriptionId: z.string().optional()
+  //     },
+  //     async (params) => {
+  //       return handleEndpoint(async () => {
+  //         const subscriptionEndpointPath = params.subscriptionId ? `/subscription/${params.subscriptionId}` : ''
+  //         const endpoint = `/communication-preferences/v3/status/email/${params.contactId}${subscriptionEndpointPath}`
+  //         return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint)
+  //       })
+  //     }
+  //   )
 
   // [FILTERED] communications_update_preferences
   //   server.tool("communications_update_preferences",
@@ -2561,36 +2574,38 @@ function createServer({ config }: { config?: any } = {}) {
   //     }
   //   )
 
-  server.tool("communications_get_subscription_definitions",
-    "Get all subscription definitions for the portal",
-    {
-      archived: z.boolean().optional()
-    },
-    async (params) => {
-      return handleEndpoint(async () => {
-        const endpoint = '/communication-preferences/v3/definitions'
-        return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {
-          archived: params.archived
-        })
-      })
-    }
-  )
+  // [FILTERED] communications_get_subscription_definitions
+  //   server.tool("communications_get_subscription_definitions",
+  //     "Get all subscription definitions for the portal",
+  //     {
+  //       archived: z.boolean().optional()
+  //     },
+  //     async (params) => {
+  //       return handleEndpoint(async () => {
+  //         const endpoint = '/communication-preferences/v3/definitions'
+  //         return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {
+  //           archived: params.archived
+  //         })
+  //       })
+  //     }
+  //   )
 
-  server.tool("communications_get_subscription_status",
-    "Get subscription status for multiple contacts",
-    {
-      subscriptionId: z.string(),
-      contactIds: z.array(z.string())
-    },
-    async (params) => {
-      return handleEndpoint(async () => {
-        const endpoint = `/communication-preferences/v3/status/email/subscription/${params.subscriptionId}/bulk`
-        return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {}, 'POST', {
-          contactIds: params.contactIds
-        })
-      })
-    }
-  )
+  // [FILTERED] communications_get_subscription_status
+  //   server.tool("communications_get_subscription_status",
+  //     "Get subscription status for multiple contacts",
+  //     {
+  //       subscriptionId: z.string(),
+  //       contactIds: z.array(z.string())
+  //     },
+  //     async (params) => {
+  //       return handleEndpoint(async () => {
+  //         const endpoint = `/communication-preferences/v3/status/email/subscription/${params.subscriptionId}/bulk`
+  //         return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {}, 'POST', {
+  //           contactIds: params.contactIds
+  //         })
+  //       })
+  //     }
+  //   )
 
   // [FILTERED] communications_update_subscription_status
   //   server.tool("communications_update_subscription_status",
@@ -2625,38 +2640,40 @@ function createServer({ config }: { config?: any } = {}) {
     hs_recurring_billing_period: z.string().optional(),
   }).catchall(z.any())
 
-  server.tool("products_list",
-    "Read a page of products. Control what is returned via the `properties` query param. `after` is the paging cursor token of the last successfully read resource will be returned as the `paging.next.after` JSON property of a paged response containing more results.",
-    {
-      limit: z.number().min(1).optional(),
-      after: z.string().optional(),
-      properties: z.array(z.string()).optional()
-    },
-    async params => handleEndpoint(async () => {
-      const endpoint = '/crm/v3/objects/products'
-      return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {
-        limit: params.limit,
-        after: params.after,
-        properties: params.properties?.join(',')
-      })
-    })
-  )
+  // [FILTERED] products_list
+  //   server.tool("products_list",
+  //     "Read a page of products. Control what is returned via the `properties` query param. `after` is the paging cursor token of the last successfully read resource will be returned as the `paging.next.after` JSON property of a paged response containing more results.",
+  //     {
+  //       limit: z.number().min(1).optional(),
+  //       after: z.string().optional(),
+  //       properties: z.array(z.string()).optional()
+  //     },
+  //     async params => handleEndpoint(async () => {
+  //       const endpoint = '/crm/v3/objects/products'
+  //       return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {
+  //         limit: params.limit,
+  //         after: params.after,
+  //         properties: params.properties?.join(',')
+  //       })
+  //     })
+  //   )
 
-  server.tool("products_read",
-    "Read an Object identified by ID",
-    {
-      productId: z.string(),
-      properties: z.array(z.string()).optional(),
-      associations: z.array(z.string()).optional()
-    },
-    async params => handleEndpoint(async () => {
-      const endpoint = `/crm/v3/objects/products/${params.productId}`
-      return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {
-        properties: params.properties?.join(','),
-        associations: params.associations?.join(',')
-      })
-    })
-  )
+  // [FILTERED] products_read
+  //   server.tool("products_read",
+  //     "Read an Object identified by ID",
+  //     {
+  //       productId: z.string(),
+  //       properties: z.array(z.string()).optional(),
+  //       associations: z.array(z.string()).optional()
+  //     },
+  //     async params => handleEndpoint(async () => {
+  //       const endpoint = `/crm/v3/objects/products/${params.productId}`
+  //       return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {
+  //         properties: params.properties?.join(','),
+  //         associations: params.associations?.join(',')
+  //       })
+  //     })
+  //   )
 
   // [FILTERED] products_create
   //   server.tool("products_create",
@@ -2688,34 +2705,35 @@ function createServer({ config }: { config?: any } = {}) {
   //     })
   //   )
 
-  server.tool("products_search",
-    "Search products",
-    {
-      query: z.string().optional(),
-      limit: z.number().min(1).optional(),
-      after: z.string().optional(),
-      sorts: z.array(z.string()).optional(),
-      properties: z.array(z.string()).optional(),
-      filterGroups: z.array(z.object({
-        filters: z.array(z.object({
-          propertyName: z.string(),
-          operator: z.enum(['EQ', 'NEQ', 'LT', 'LTE', 'GT', 'GTE', 'BETWEEN', 'IN', 'NOT_IN', 'HAS_PROPERTY', 'NOT_HAS_PROPERTY', 'CONTAINS_TOKEN', 'NOT_CONTAINS_TOKEN']),
-          value: z.any().optional(),
-          values: z.array(z.any()).optional()
-        }))
-      })),
-    },
-    async params => handleEndpoint(async () => {
-      const endpoint = '/crm/v3/objects/products/search'
-      return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {}, 'POST', {
-        filterGroups: params.filterGroups,
-        properties: params.properties,
-        limit: params.limit,
-        after: params.after,
-        sorts: params.sorts
-      })
-    })
-  )
+  // [FILTERED] products_search
+  //   server.tool("products_search",
+  //     "Search products",
+  //     {
+  //       query: z.string().optional(),
+  //       limit: z.number().min(1).optional(),
+  //       after: z.string().optional(),
+  //       sorts: z.array(z.string()).optional(),
+  //       properties: z.array(z.string()).optional(),
+  //       filterGroups: z.array(z.object({
+  //         filters: z.array(z.object({
+  //           propertyName: z.string(),
+  //           operator: z.enum(['EQ', 'NEQ', 'LT', 'LTE', 'GT', 'GTE', 'BETWEEN', 'IN', 'NOT_IN', 'HAS_PROPERTY', 'NOT_HAS_PROPERTY', 'CONTAINS_TOKEN', 'NOT_CONTAINS_TOKEN']),
+  //           value: z.any().optional(),
+  //           values: z.array(z.any()).optional()
+  //         }))
+  //       })),
+  //     },
+  //     async params => handleEndpoint(async () => {
+  //       const endpoint = '/crm/v3/objects/products/search'
+  //       return await makeApiRequestWithErrorHandling(hubspotAccessToken, endpoint, {}, 'POST', {
+  //         filterGroups: params.filterGroups,
+  //         properties: params.properties,
+  //         limit: params.limit,
+  //         after: params.after,
+  //         sorts: params.sorts
+  //       })
+  //     })
+  //   )
 
   // [FILTERED] products_batch_archive
   //   server.tool("products_batch_archive",
