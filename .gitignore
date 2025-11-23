@@ -6,3 +6,6 @@ dist/
 # User-specific Claude settings
 .env
 .claude/settings.json
+
+# MCP config with secrets
+.mcp-config.json
